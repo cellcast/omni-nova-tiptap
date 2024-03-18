@@ -165,6 +165,21 @@
                             />
                         </div>
 
+                        <div class="flex flex-col">
+                            <label class="text-sm mb-1 ml-1" v-text="ttt('link url')"></label>
+                            <input
+                                class="
+                                    form-input
+                                    form-input-bordered
+                                    px-2 py-1 w-full
+                                    text-sm text-90
+                                    leading-none
+                                "
+                                type="text"
+                                v-model="linkUrl"
+                            />
+                        </div>
+
                         <div class="flex flex-col mt-3">
                             <label class="text-sm mb-1 ml-1" v-text="ttt('alt text')"></label>
                             <input
@@ -264,6 +279,7 @@ export default {
             imageMode: 'url',
             title: '',
             alt: '',
+            linkUrl: '',
         }
     },
 
@@ -340,6 +356,7 @@ export default {
                 class: this.extraClasses,
                 title: this.title,
                 alt: this.alt,
+                'tt-link-url': this.linkUrl, // Set tt-link-url with the link URL
             };
 
             this.editor.chain().focus().setImage(attributes).run();
