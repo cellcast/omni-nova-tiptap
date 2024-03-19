@@ -314,12 +314,14 @@ export default {
                 this.extraClasses = attributes.class ? attributes.class : '';
                 this.title = attributes.title ? attributes.title : '';
                 this.alt = attributes.alt ? attributes.alt : '';
+                this.linkUrl = attributes['tt-link-url'] ? attributes['tt-link-url'] : '';
             } else {
                 this.url = '';
                 this.imageMode = this.defaultMode;
                 this.extraClasses = '';
                 this.title = '';
                 this.alt = '';
+                this.linkUrl = '';
             }
             
             this.imageMenuIsActive = true;
@@ -392,6 +394,7 @@ export default {
                         class: this.extraClasses,
                         title: this.title,
                         alt: this.alt,
+                        'tt-link-url': this.linkUrl,
                     };
 
                     this.editor.chain().focus().setImage(attributes).run();
@@ -414,6 +417,7 @@ export default {
                 class: this.extraClasses,
                 title: this.title,
                 alt: this.alt,
+                'tt-link-url': this.linkUrl,
             };
 
             this.editor.chain().focus().updateAttributes('image', attributes).run();
