@@ -26,6 +26,7 @@
     "typescript": "^4.3.2"
   },
   "dependencies": {
+    "@inertiajs/inertia": "^0.11.1",
     "@tiptap/core": "^2.0.0-beta.83",
     "@tiptap/extension-blockquote": "^2.0.0-beta.14",
     "@tiptap/extension-bold": "^2.0.0-beta.14",
@@ -63,6 +64,7 @@
     "add": "^2.0.6",
     "axios": "^0.21.1",
     "codemirror-editor-vue3": "^2.0.6",
+    "form-backend-validation": "^2.4.0",
     "i": "^0.3.6",
     "lodash": "^4.17.21",
     "lowlight": "^2.6.1",
@@ -73,6 +75,7 @@
     "vue-loader": "^17.0.0",
     "vue-template-compiler": "^2.6.14",
     "vue-trix": "^1.2.0",
+    "vuex": "^4.1.0",
     "yarn": "^1.22.11"
   }
 }
