@@ -240,6 +240,18 @@ export default {
     };
   },
 
+  watch: {
+    avRequired(val) {
+      let classes = this.extraClasses
+        .split(" ")
+        .filter((cls) => cls !== "av-image");
+
+      if (val) classes.push("av-image");
+
+      this.extraClasses = classes.join(" ");
+    },
+  },
+
   components: {
     FontAwesomeIcon,
     BaseButton,
