@@ -1,19 +1,19 @@
-let mix = require('laravel-mix');
+let mix = require("laravel-mix");
 
-require('./nova.mix');
+require("./nova.mix");
 
 mix
-  .setPublicPath('dist')
-  .js('resources/js/field.js', 'js')
+  .setPublicPath("dist")
+  .js("resources/js/field.js", "js")
   .vue({ version: 3 })
   .webpackConfig({
     externals: {
-      vue: 'Vue',
+      vue: "Vue",
     },
     output: {
-      uniqueName: 'vendor/package',
+      uniqueName: "vendor/package",
     },
   })
-  .postCss('resources/css/tiptap.css', 'css')
-  .nova('manogi/tiptap');
+  .postCss("resources/css/tiptap.css", "css")
+  .nova("manogi/tiptap");
 //.combine('node_modules/codemirror/theme/*.css', 'resources/css/codemirror-themes.css')
