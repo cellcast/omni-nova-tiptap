@@ -60,7 +60,6 @@ div.relative.overflow-hidden:has(.nova-tiptap-editor) {
   overflow: visible;
 }
 .av-image {
-  width: 100%; /* Ensure image takes up the full width */
   height: auto; /* Maintain aspect ratio */
   position: relative;
   border: 5px solid red;
