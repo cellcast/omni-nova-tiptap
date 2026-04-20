@@ -100,7 +100,7 @@ library.add(faVideo);
 export default {
     mixins: [translations],
 
-    props: ["button", "editor", "field", "mode"],
+    props: ["button", "editor", "field", "mode", "formUniqueId"],
 
     data: function () {
         return {
@@ -111,6 +111,13 @@ export default {
             error: "",
             searchTimer: null,
             fetchId: 0,
+            dependencyValue:
+                this.field &&
+                this.field.videoPickerDependsOn &&
+                this.field.videoPickerDependsOn.initialValue !== undefined
+                    ? this.field.videoPickerDependsOn.initialValue
+                    : null,
+            watchedEvents: [],
         };
     },
 
@@ -124,6 +131,11 @@ export default {
                 ? this.field.videoPickerEndpoint
                 : null;
         },
+        dependency() {
+            return this.field && this.field.videoPickerDependsOn
+                ? this.field.videoPickerDependsOn
+                : null;
+        },
     },
 
     watch: {
@@ -133,6 +145,37 @@ export default {
                 this.fetchVideos();
             }, 250);
         },
+    },
+
+    mounted() {
+        if (!this.dependency) {
+            return;
+        }
+
+        const handler = (value) => {
+            this.dependencyValue = value;
+        };
+
+        const names = [`${this.dependency.attribute}-change`];
+
+        if (this.formUniqueId) {
+            names.push(
+                `${this.formUniqueId}-${this.dependency.attribute}-change`,
+            );
+        }
+
+        names.forEach((name) => {
+            Nova.$on(name, handler);
+            this.watchedEvents.push({ name, handler });
+        });
+    },
+
+    beforeUnmount() {
+        this.watchedEvents.forEach(({ name, handler }) => {
+            Nova.$off(name, handler);
+        });
+
+        this.watchedEvents = [];
     },
 
     methods: {
@@ -157,13 +200,33 @@ export default {
                 return;
             }
 
+            const params = { search: this.search };
+
+            if (this.dependency) {
+                const value = this.dependencyValue;
+
+                if (value === null || value === undefined || value === "") {
+                    this.videos = [];
+                    this.loading = false;
+                    this.error =
+                        this.ttt("select a value for") +
+                        ' "' +
+                        (this.dependency.label || this.dependency.attribute) +
+                        '" ' +
+                        this.ttt("first to load videos");
+                    return;
+                }
+
+                params[this.dependency.queryParam] = value;
+            }
+
             this.loading = true;
             this.error = "";
 
             const requestId = ++this.fetchId;
 
             Nova.request()
-                .get(this.endpoint, { params: { search: this.search } })
+                .get(this.endpoint, { params })
                 .then((response) => {
                     if (requestId !== this.fetchId) {
                         return;

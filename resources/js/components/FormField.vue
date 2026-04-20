@@ -76,6 +76,7 @@
                   :button="button"
                   :field="currentField"
                   :mode="mode"
+                  :formUniqueId="formUniqueId"
                 >
                 </video-placeholder-button>
               </template>

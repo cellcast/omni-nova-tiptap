@@ -219,6 +219,25 @@ class Tiptap extends Field
     }
 
     /**
+     * Bind the video picker to a sibling form field. The picker will send the
+     * field's current value as a query param to the picker endpoint, tracking
+     * live changes via Nova's form events.
+     *
+     * @return $this
+     */
+    public function videoPickerDependsOn(string $attribute, ?string $label = null, $initialValue = null, ?string $queryParam = null)
+    {
+        return $this->withMeta([
+            'videoPickerDependsOn' => [
+                'attribute' => $attribute,
+                'label' => $label ?? $attribute,
+                'queryParam' => $queryParam ?? $attribute,
+                'initialValue' => $initialValue,
+            ],
+        ]);
+    }
+
+    /**
      * Set setting to save the input as json object.
      *
      * @param  bool  $saveAsJson
