@@ -207,6 +207,18 @@ class Tiptap extends Field
     }
 
     /**
+     * Set the endpoint used by the video placeholder button to search videos.
+     *
+     * @return $this
+     */
+    public function videoPickerEndpoint(string $url)
+    {
+        return $this->withMeta([
+            'videoPickerEndpoint' => $url,
+        ]);
+    }
+
+    /**
      * Set setting to save the input as json object.
      *
      * @param  bool  $saveAsJson
