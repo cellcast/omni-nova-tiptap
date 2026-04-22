@@ -69,3 +69,9 @@
 div.relative.overflow-hidden:has(.nova-tiptap-editor) {
   overflow: visible;
 }
+
+.av-image {
+  height: auto;
+  position: relative;
+  border: 5px solid red;
+}

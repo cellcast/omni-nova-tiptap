@@ -70,6 +70,17 @@
                 </placeholder-block-button>
               </template>
 
+              <template v-else-if="button == 'videoPlaceholder'">
+                <video-placeholder-button
+                  :editor="editor"
+                  :button="button"
+                  :field="currentField"
+                  :mode="mode"
+                  :formUniqueId="formUniqueId"
+                >
+                </video-placeholder-button>
+              </template>
+
               <template v-else-if="button == 'contentBlock'">
                 <content-block-button
                   :editor="editor"
@@ -193,6 +204,7 @@ import RtlButton from "./buttons/RtlButton";
 import HistoryButtons from "./buttons/HistoryButtons";
 import ImageButton from "./buttons/ImageButton";
 import PlaceholderBlockButton from "./buttons/PlaceholderBlockButton";
+import VideoPlaceholderButton from "./buttons/VideoPlaceholderButton.vue";
 import ContentBlockButton from "./buttons/ContentBlockButton";
 import BaseButton from "./buttons/BaseButton.vue";
 
@@ -228,6 +240,7 @@ export default {
     HistoryButtons,
     ImageButton,
     PlaceholderBlockButton,
+    VideoPlaceholderButton,
     ContentBlockButton,
     EditHtml,
     BaseButton,
